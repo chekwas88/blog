@@ -1,4 +1,3 @@
-# AdvancedNodeStarter
 A repo to practice some advanced node concepts such as:
 
 #### Caching using --- Redis
