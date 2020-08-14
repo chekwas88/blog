@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - "8"
 
-dist: trusthy
+dist: trusty
 services:
   - mongodb
   - redis-server
@@ -19,8 +19,9 @@ cache:
 install:
   - npm install
   - npm run build
-
+before_script:
+  - nohup npm run start &
+  
 script:
-  - nohub npm run start &
-  - sleep 3
+  - sleep 5
   - npm run test
