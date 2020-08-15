@@ -1,8 +1,41 @@
+# language: node_js
+# node_js:
+#   - "8"
+# sudo: false
+# dist: trusty
+# services:
+#   - mongodb
+#   - redis-server
+
+# env:
+#   - NODE_ENV=ci
+#   - PORT=3000
+# addons:
+#   chrome: stable
+
+# cache:
+#   directories:
+#     - node_modules
+#     - client/node_modules
+
+# before_install:
+#   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+
+# install:
+#   - npm install
+#   - npm run build
+# before_script:
+#   - npm run start &
+
+# script:
+#   - sleep 20
+#   - npm run test
+
 language: node_js
 node_js:
-  - "8"
-
+  - "9"
 dist: trusty
+sudo: required
 services:
   - mongodb
   - redis-server
@@ -10,18 +43,19 @@ services:
 env:
   - NODE_ENV=ci
   - PORT=3000
+addons:
+  chrome: stable
+  hostname: localhost
 
+before_script:
+  - nohup npm start &
 cache:
   directories:
     - node_modules
     - client/node_modules
-
 install:
   - npm install
   - npm run build
-before_script:
-  - nohup npm run start &
-  
 script:
   - sleep 5
-  - npm run test
+  - npm test

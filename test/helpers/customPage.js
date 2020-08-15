@@ -29,7 +29,10 @@ class CustomPage {
         const {session, sig} = sessionFactory(user);
         await this.page.setCookie({url: 'http://localhost:3000', name:"session", value: session});
         await this.page.setCookie({url: 'http://localhost:3000', name:"session.sig", value: sig});
-        await this.page.goto("http://localhost:3000/blogs");
+        await this.page.goto("http://localhost:3000/blogs", {
+            waitUntil: "networkidle0",
+            timeout: 6000
+        });
         await this.page.waitFor("a[href='/auth/logout']");
     }
 

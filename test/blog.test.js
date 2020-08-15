@@ -4,7 +4,11 @@ let page;
 
 beforeEach(async () => {
     page = await Page.build();
-    await page.goto("http://localhost:3000");
+    await page.goto("http://localhost:3000", {
+        waitUntil: "networkidle0",
+        timeout: 6000
+    });
+    console.log("page",page.url())
 });
 
 afterEach(async () => {
